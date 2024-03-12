@@ -10,9 +10,11 @@ La productividad está en auge en estos últimos años, y cada vez se publican m
 **El objetivo principal será el de hacer una web-app sencilla y funcional donde el usuario pueda subir sus archivos multimedia y estos se procesen, generando un resumen de lo que el usuario está proporcionando.**
 
 ## STACK
-Python como lenguaje principal, desde el que llamaremos a las APIs y se controlará el flujo de la aplicación. El framework para la app será Flask.
-HTML, CSS Y JS para el frontend de la página web.
-Docker como contenedor para la aplicación, lo que nos permite poder crearla portable entre clouds, lo cual será clave si los créditos de alguna de ellas se nos acaban. 
+**Python** como lenguaje principal, desde el que llamaremos a las APIs y se controlará el flujo de la aplicación. El framework para la app será **Flask**.
+
+**HTML, CSS Y JS** para el frontend de la página web.
+
+**Docker** como contenedor para la aplicación, lo que nos permite poder crearla portable entre clouds, lo cual será clave si los créditos de alguna de ellas se nos acaban. 
 
 ## Utilizaremos control de versiones con la siguiente estructura:
 - **Rama main:** para los cambios finales antes de un hito.
@@ -34,5 +36,8 @@ Cada commit llevara asociado un changelog acumulativo de los cambios realizados 
 
 ## Miembros 
 Álvaro Corrochano López, 10/10 de implicación. -> Corrochano
+
 Álvaro Álvarez Iglesias, 10/10 de implicación. -> AlvarezIglesias
+
 Cristian Molina Muñoz, 10/10 de implicación. -> crismom / crismo04
+
