@@ -1,4 +1,7 @@
 
+## 2024-03-13 - feature/cmolina/docker
+
+- Add dockerfile & instructions to install it
 
 ## 2024-03-12 - feature/cmolina/changelogMD
 

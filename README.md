@@ -16,6 +16,14 @@ La productividad está en auge en estos últimos años, y cada vez se publican m
 
 **Docker** como contenedor para la aplicación, lo que nos permite poder crearla portable entre clouds, lo cual será clave si los créditos de alguna de ellas se nos acaban. 
 
+## Instalacion
+
+La aplicacion viene con un dockerfile para que sea mas sencillo desplegarla, para ponerla en marcha en local hay que seguir estos pasos
+
+ 1- **sudo docker build -t appstract-image .**  # Te crea una imagen (tambien se puede descargar del repositorio de docker)
+ 2- **sudo docker run -p 5000:5000 appstract-image** # despliega la imagen en local
+ 3- **Accede a -> http://localhost:5000/** # Y todo listo!
+
 ## Utilizaremos control de versiones con la siguiente estructura:
 - **Rama main:** para los cambios finales antes de un hito.
 - **Rama develop** para los cambios en proceso, pero finalizados y para probar.
