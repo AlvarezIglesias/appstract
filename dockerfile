@@ -18,18 +18,18 @@ EXPOSE 5000
 
 # Comando para ejecutar la aplicación en local cuando se usa docker run
 # CMD ["flask", "run", "--host=0.0.0.0"]
+
 # Una vez que se suba a cloud hay que usar otro CMD; y no se si tocar algo mas para instalar gunicorn
 CMD ["gunicorn", "-b", ":8080", "app:main"]
 
-# Para ejecutarla: TODO revisar el sudo, a veces en cloud no iba
+# Para ejecutarla: 
 # sudo docker build -t appstract-image .  # Te crea una imagen 
-# ! para gcp hay que ponerle el gcp delante ! docker build -t gcr.io/PROJECT_ID/appstract .
-# sudo docker run -p 5000:5000 appstract-image # te despliega la imagen en local
-# ! para gcp hay que hacerlo con botones y levantar a mano (y acordarse de apagarlo para que no cobre)
 # Accede a -> http://localhost:5000/
 
-
-
-
-# docker push gcr.io/PROJECT_ID/appstract
-# gcloud run deploy appstract --image gcr.io/PROJECT_ID/appstract --platform managed --region REGION --allow-unauthenticated
+# ! para GCP: 
+# EN bash:
+#   gcloud auth login
+#   gcloud auth configure-docker europe-west1-docker.pkg.dev  #! cambiar la region si es necesario
+#   gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin https://europe-west1-docker.pkg.dev/ #! Para login en docker
+#   sudo docker tag nodered/node-red:latest eu.pkg.dev/amazing-badge-417017/tmi-appstract/appstract #! Para renombrar la imagen
+#   sudo docker push  europe-west1-docker.pkg.dev/amazing-badge-417017/tmi-appstract/appstract
