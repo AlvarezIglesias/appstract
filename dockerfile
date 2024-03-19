@@ -4,6 +4,8 @@ FROM python:3.8-slim
 # Con esto todo se crea dentro de la carpeta /app en el docker  
 WORKDIR /app
 
+# ENV GOOGLE_ENTRYPOINT="python main.py"
+
 #installa dependencias
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
@@ -15,9 +17,9 @@ COPY . .
 EXPOSE 5000
 
 # Comando para ejecutar la aplicación en local cuando se usa docker run
-CMD ["flask", "run", "--host=0.0.0.0"]
+# CMD ["flask", "run", "--host=0.0.0.0"]
 # Una vez que se suba a cloud hay que usar otro CMD; y no se si tocar algo mas para instalar gunicorn
-# ! CMD ["gunicorn", "-b", ":8080", "app:app"]
+CMD ["gunicorn", "-b", ":8080", "app:main"]
 
 # Para ejecutarla: TODO revisar el sudo, a veces en cloud no iba
 # sudo docker build -t appstract-image .  # Te crea una imagen 
