@@ -3,3 +3,4 @@ gunicorn==21.2.0
 watchdog==4.0.0
 gcloud==0.18.3
 google-cloud-speech==2.25.1
+moviepy==1.0.3

@@ -1,7 +1,4 @@
 import os
-
-import argparse
-
 from google.cloud import speech
 
 def transcribe_file(speech_file: str) -> speech.RecognizeResponse:
