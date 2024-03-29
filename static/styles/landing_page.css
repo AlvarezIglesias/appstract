@@ -1,0 +1,28 @@
+.container {
+    width: 400px;
+    margin: 0 auto;
+  }
+  .box {
+    width: 200px;
+    height: 150px;
+    text-align: center;
+    float: left;
+  }
+  .box-1 {
+    background: #ff4500;
+  }
+  .box-2 {
+    background: #0ffab9;
+  }
+  .box-2:before {
+    display: inline-block;
+    margin: 0;
+    margin-left: -101px;
+    margin-top: -1px;
+    position: absolute;
+    content: '';
+    width: 0;
+      height: 0;
+      border-bottom: 151px solid #0ffab9;
+      border-left: 30px solid transparent;
+  }
