@@ -1,4 +1,9 @@
 
+## 2024-03-30 - feature/cmolina/videoTest
+
+- Creacion de la carpeta de tools donde se guardaran los python auxiliares de la aplicacion
+- Creacion de video_to_audio.py usando la libreria moviepy
+
 ## 2024-03-13 - feature/cmolina/docker
 
 - Configure files to update GCP
