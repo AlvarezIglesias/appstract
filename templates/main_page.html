@@ -96,6 +96,12 @@
             <div><br></div>
             <button type="submit" class="btn btn-primary btn-block">Resumir</button>
         </form>
+
+        <div>
+            {% if 'abstract' in data %}
+            <p>Abstract: {{ data['abstract'] }}</p>
+            {% endif %}
+        </div>
         <div class="footer">
             <a href="#about">¿Qué es Appstract?</a>
         </div>

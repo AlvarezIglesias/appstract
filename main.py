@@ -33,7 +33,6 @@ def allowed_file(filename):
 def upload_file():
     if request.method == 'POST':
         # check if the post request has the file part
-        print(request.files)
         if 'file_audio' not in request.files:
             flash('No file part')
             return redirect(request.url)
@@ -46,7 +45,8 @@ def upload_file():
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(UPLOAD_FOLDER, filename))
-            return redirect(url_for('download_file', name=filename))
+            data={'abstract' : 'TLDR'}
+            return render_template("/main_page.html", data=data)
     return '''
     <!doctype html>
     <title>ERROR</title>
