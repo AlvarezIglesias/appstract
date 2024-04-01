@@ -46,8 +46,16 @@ def upload_file():
             filename = secure_filename(file.filename)
             filepath = os.path.join(UPLOAD_FOLDER, filename)
             file.save(filepath)
-            data={'abstract' : transcribe_file(filepath)}
-            return render_template("/main_page.html", data=data)
+            response = transcribe_file(filepath)
+
+            data = ''
+
+            for result in response.results:
+                data += result.alternatives[0].transcript + ' '
+
+            print(data)
+
+            return render_template("/main_page.html", data={"Resumen:" : data})
     return '''
     <!doctype html>
     <title>ERROR</title>
