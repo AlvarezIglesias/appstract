@@ -2,7 +2,7 @@ import os
 from flask import Flask, flash, request, redirect, url_for, render_template
 from werkzeug.utils import secure_filename
 import random
-
+from tools.read_audio import transcribe_file
 
 # Todo manage the tmp folder (delete the files an so on) 
 if not os.path.exists('tmp'):
@@ -44,8 +44,9 @@ def upload_file():
             return redirect(request.url)
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            file.save(os.path.join(UPLOAD_FOLDER, filename))
-            data={'abstract' : 'TLDR'}
+            filepath = os.path.join(UPLOAD_FOLDER, filename)
+            file.save(filepath)
+            data={'abstract' : transcribe_file(filepath)}
             return render_template("/main_page.html", data=data)
     return '''
     <!doctype html>
