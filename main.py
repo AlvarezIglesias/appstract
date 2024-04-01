@@ -10,7 +10,11 @@ if not os.path.exists('tmp'):
 app = Flask(__name__)
 
 @app.route('/')
-def hello():
+def langing_page():
+    return render_template("/landing_page.html")
+
+@app.route('/mainpage/')
+def main_page():
     return render_template("/main_page.html")
 
 if __name__ == '__main__':
