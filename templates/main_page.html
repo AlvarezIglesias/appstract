@@ -69,27 +69,27 @@
         <div class="title">
             ¿Qué quieres hacer?
         </div>
-        <form method="post" action="/mainpage/file/">
+        <form method="POST" action="/mainpage/file/" enctype="multipart/form-data">
             <div class="options">
                 <a href="https://www.google.com">
                     <div class="option">
                         <img src="https://cdn.iconscout.com/icon/free/png-256/free-sound-2451537-2082547.png" alt="Audio a Texto">
                         <h2>Audio a Texto</h2>
-                        <input type="file" accept=".mp3" id="userFile">
+                        <input type="file" accept=".mp3" name="file_audio">
                     </div>
                 </a>
                 <div class="option">
                     <a href="https://www.google.com">
                         <img src="https://cdn.iconscout.com/icon/free/png-256/free-youtube-292-893504.png" alt="Audio a Texto">
                         <h2>Video a Texto</h2>
-                        <input type="file" accept=".mp4">
+                        <input type="file" accept=".mp4" name="file_video">
                     </a>
                 </div>
                 <div class="option">
                     <a href="https://www.google.com">
                         <img src="https://cdn.iconscout.com/icon/free/png-256/free-message-2367724-1976874.png" alt="Audio a Texto">
                         <h2>Texto a Texto</h2>
-                        <input type="file" accept=".txt">
+                        <input type="file" accept=".txt" name="file_text">
                     </a>
                 </div>
             </div>

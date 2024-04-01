@@ -22,8 +22,8 @@ def main_page():
 
 
 # from flask documentation: https://flask.palletsprojects.com/en/2.3.x/patterns/fileuploads/
-ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
-UPLOAD_FOLDER = '/tmp/'
+ALLOWED_EXTENSIONS = {'mp3'}
+UPLOAD_FOLDER = './tmp'
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -33,10 +33,11 @@ def allowed_file(filename):
 def upload_file():
     if request.method == 'POST':
         # check if the post request has the file part
-        if 'file' not in request.files:
+        print(request.files)
+        if 'file_audio' not in request.files:
             flash('No file part')
             return redirect(request.url)
-        file = request.files['file']
+        file = request.files['file_audio']
         # If the user does not select a file, the browser submits an
         # empty file without a filename.
         if file.filename == '':
@@ -44,16 +45,12 @@ def upload_file():
             return redirect(request.url)
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            file.save(os.path.join(UPLOAD_FOLDER, filename))
             return redirect(url_for('download_file', name=filename))
     return '''
     <!doctype html>
-    <title>Upload new File</title>
-    <h1>Upload new File</h1>
-    <form method=post enctype=multipart/form-data>
-      <input type=file name=file>
-      <input type=submit value=Upload>
-    </form>
+    <title>ERROR</title>
+    <h1>ERROR</h1>
     '''
 
 if __name__ == '__main__':
