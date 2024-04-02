@@ -1,5 +1,7 @@
 import os
 from google.cloud import speech
+from google.auth.exceptions import DefaultCredentialsError
+
 
 def transcribe_file(speech_file: str) -> speech.RecognizeResponse:
     """Transcribe the given audio file."""
@@ -25,8 +27,10 @@ def transcribe_file(speech_file: str) -> speech.RecognizeResponse:
             print(f"Transcript: {result.alternatives[0].transcript}")
 
         return response
-    except:
-        return "Something went wrong when transcribing the audio. Please try later."
+    except DefaultCredentialsError as cred:
+        return f"Bad credentials at read_audio: {cred} \n \n please, run: gcloud auth application-default login"
+    except Exception as e:
+        return f"something was wrong: {e}"
 
 #transcribe_file(os.path.join("tmp", "mitocondria.mp3"))
 

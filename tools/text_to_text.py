@@ -1,11 +1,16 @@
 import vertexai
 from vertexai.preview.language_models import TextGenerationModel
-
-import sys
+import os, sys
 sys.path.append('../')
 
-from credentials.ids import PROJECT
-from credentials.ids import REGION
+PROJECT = os.environ.get('PROJECT')
+# Verifica si la variable de entorno existe
+if PROJECT is None:
+    from credentials.ids import PROJECT
+
+REGION = os.environ.get('REGION')
+if PROJECT is None:
+    from credentials.ids import REGION
 
 def predict_large_language_model(
     project_id: str,
