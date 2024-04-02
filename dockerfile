@@ -1,5 +1,5 @@
 # TODO Creo que con la slim sera suficiente, si no instalamos mas cosas luego
-FROM python:3.8-slim
+FROM python:3.10-slim
 
 # Con esto todo se crea dentro de la carpeta /app en el docker  
 WORKDIR /app

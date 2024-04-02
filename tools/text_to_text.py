@@ -57,15 +57,28 @@ def predict_large_language_model(
     return response.text
 
 
-def summarize_text(text):
+def summarize_text(text, words=100, mood="normal", max_words='20000'):
     model_name = "text-bison@001"
     temperature = 0.2
     max_decode_steps = 1024
     top_p = 0.8
     top_k = 40
-
-    prompt = 'Resume el siguiente texto en menos palabras de las dadas:'
-    content = f"{prompt}\n{text}"
+    if text.lenght() > max_words:
+        return "El archivo multimedia elegido es demasiado grande para procesarlo."
+    if text.lenght() < words:
+        content = f"""Te voy a pasar un pequeño texto o una serie de caracteres, tienes que resumirlo de una manera {mood}:
+    
+        {text}
+        
+        Con esto, genetra una descripcion o resumen de unas {words} palabras.
+        """
+    else:
+        content = f"""Te voy a pasar un texto o una serie de caracteres, tienes que resumirlo de una manera {mood}:
+    
+        {text}
+        
+        Con esto, genetra una descripcion o resumen de mas o menos {words} palabras.
+        """
 
     summary = predict_large_language_model(
         project_id=PROJECT,
