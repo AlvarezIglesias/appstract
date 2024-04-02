@@ -2,7 +2,9 @@ import os
 from flask import Flask, flash, request, redirect, url_for, render_template
 from werkzeug.utils import secure_filename
 import random
+
 from tools.read_audio import transcribe_file
+from tools.text_to_text import summarize_text
 
 # Todo manage the tmp folder (delete the files an so on) 
 if not os.path.exists('tmp'):
@@ -46,16 +48,19 @@ def upload_file():
             filename = secure_filename(file.filename)
             filepath = os.path.join(UPLOAD_FOLDER, filename)
             file.save(filepath)
+            
             response = transcribe_file(filepath)
 
             data = ''
 
             for result in response.results:
                 data += result.alternatives[0].transcript + ' '
+            
+            data = str(summarize_text(data))
 
             print(data)
 
-            return render_template("/main_page.html", data={"Resumen:" : data})
+            return render_template("/main_page.html", data={"abstract" : data})
     return '''
     <!doctype html>
     <title>ERROR</title>
