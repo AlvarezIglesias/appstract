@@ -50,14 +50,15 @@ def upload_file():
             file.save(filepath)
             
             response = transcribe_file(filepath)
-
+            print(f"respuesta: {response}")
             data = ''
-
-            for result in response.results:
-                data += result.alternatives[0].transcript + ' '
-            
-            data = str(summarize_text(data))
-
+            if response.results:
+                for result in response.results:
+                    data += result.alternatives[0].transcript + ' '
+                data = str(summarize_text(data))
+            else:
+                print(f"Ha habido un problema con el audio: {response}")
+                
             print(data)
 
             return render_template("/main_page.html", data={"abstract" : data})

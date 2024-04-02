@@ -24,6 +24,12 @@ La aplicacion viene con un dockerfile para que sea mas sencillo desplegarla, par
  2- **sudo docker run -p 5000:5000 appstract-image** # despliega la imagen en local
  3- **Accede a -> http://localhost:5000/** # Y todo listo!
 
+### Subir contenedor a goolge:
+1. gcloud auth login
+2. gcloud auth configure-docker europe-west1-docker.pkg.dev
+3. gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin https://europe-west1-docker.pkg.dev/
+4. gcloud run deploy  -- (Seguir las instrucciones, region 16, )
+
 ## Utilizaremos control de versiones con la siguiente estructura:
 - **Rama main:** para los cambios finales antes de un hito.
 - **Rama develop** para los cambios en proceso, pero finalizados y para probar.
