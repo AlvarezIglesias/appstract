@@ -1,6 +1,14 @@
 
 ## 2024-03-30 - feature/cmolina/videoTest
 
+- Añadida una secuencia de carga para hacer la espera mas amena
+- Nuevo estilo para los botones de la main page
+- Fix del logo
+- Nuevos propts para la creacion de texto, y diferenciacion segun la longitud.
+- Añadidas mejoras por implementar en la creacion de texto, como atributos de longitud y mood
+
+## 2024-03-30 - feature/cmolina/videoTest
+
 - Creacion de la carpeta de tools donde se guardaran los python auxiliares de la aplicacion
 - Creacion de video_to_audio.py usando la libreria moviepy
 

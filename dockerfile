@@ -20,10 +20,10 @@ EXPOSE 5000
 # CMD ["flask", "run", "--host=0.0.0.0"]
 
 # Una vez que se suba a cloud hay que usar otro CMD; y no se si tocar algo mas para instalar gunicorn
-CMD ["gunicorn", "-b", ":8080", "app:main"]
+CMD ["gunicorn", "-b", ":8080", "app:main","--worker-class", "gevent", "--worker-connections", "100", "--timeout", "0", "--graceful_timeout", "2000"]
 
 # Para ejecutarla: 
-# sudo docker build -t appstract-image .  # Te crea una imagen 
+# sudo docker build -t appstract-image .  # Te crea una imagen
 # Accede a -> http://localhost:5000/
 
 # ! para GCP: 

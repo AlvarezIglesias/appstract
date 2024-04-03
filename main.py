@@ -6,7 +6,7 @@ import random
 from tools.read_audio import transcribe_file
 from tools.text_to_text import summarize_text
 
-# Todo manage the tmp folder (delete the files an so on) 
+# TODO manage the tmp folder (delete the files an so on)
 if not os.path.exists('tmp'):
     print('Creando el directorio tmp')
     os.makedirs('tmp')
@@ -30,7 +30,7 @@ UPLOAD_FOLDER = './tmp'
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-           
+
 @app.route('/mainpage/file/', methods=['POST', 'GET'])
 def upload_file():
     if request.method == 'POST':
@@ -48,7 +48,7 @@ def upload_file():
             filename = secure_filename(file.filename)
             filepath = os.path.join(UPLOAD_FOLDER, filename)
             file.save(filepath)
-            
+
             response = transcribe_file(filepath)
             print(f"respuesta: {response}")
             data = ''
@@ -58,10 +58,12 @@ def upload_file():
                 data = str(summarize_text(data))
             else:
                 print(f"Ha habido un problema con el audio: {response}")
-                
+
             print(data)
 
             return render_template("/main_page.html", data={"abstract" : data})
+
+    #TODO por dios devolver un error mas descriptivo y con fotos de gatitos
     return '''
     <!doctype html>
     <title>ERROR</title>

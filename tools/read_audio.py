@@ -17,7 +17,7 @@ def transcribe_file(speech_file: str) -> speech.RecognizeResponse:
             sample_rate_hertz=16000,
             language_code="es",
         )
-
+        print("Reconociendo audio...")
         response = client.recognize(config=config, audio=audio)
 
         # Each result is for a consecutive portion of the audio. Iterate through
@@ -32,5 +32,6 @@ def transcribe_file(speech_file: str) -> speech.RecognizeResponse:
     except Exception as e:
         return f"something was wrong: {e}"
 
-#transcribe_file(os.path.join("tmp", "mitocondria.mp3"))
+# audio = "tigres.mp3"
+# transcribe_file(os.path.join("tmp", audio))
 

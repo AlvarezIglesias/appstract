@@ -14,7 +14,7 @@ La productividad está en auge en estos últimos años, y cada vez se publican m
 
 **HTML, CSS Y JS** para el frontend de la página web.
 
-**Docker** como contenedor para la aplicación, lo que nos permite poder crearla portable entre clouds, lo cual será clave si los créditos de alguna de ellas se nos acaban. 
+**Docker** como contenedor para la aplicación, lo que nos permite poder crearla portable entre clouds, lo cual será clave si los créditos de alguna de ellas se nos acaban.
 
 ## Instalacion
 
@@ -38,7 +38,7 @@ La aplicacion viene con un dockerfile para que sea mas sencillo desplegarla, par
   - **hotfix:** corrección de errores urgentes por haberse detectado un defecto crítico (generalmente en producción) que deba resolverse.
   - **Release:** Rama lista para subir a main donde poder depurar el código.
 Algunos ejemplos de ramas serian: *Feature/AlvarezIglesias/diseño_web* , *Feature/Corrochano/conexion_BBDD* o *Hotfix/cmolina/google_api_fix*
- 
+
 ## Changelog
 Cada commit llevara asociado un changelog acumulativo de los cambios realizados (los mas nuevos siempre encima) en el siguiente formato:
 
@@ -48,7 +48,7 @@ Cada commit llevara asociado un changelog acumulativo de los cambios realizados 
 - to
 - update
 
-## Miembros 
+## Miembros
 Álvaro Corrochano López, 10/10 de implicación. -> Corrochano
 
 Álvaro Álvarez Iglesias, 10/10 de implicación. -> AlvarezIglesias
