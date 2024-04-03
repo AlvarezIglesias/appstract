@@ -57,7 +57,7 @@ def predict_large_language_model(
     return response.text
 
 
-def summarize_text(text, words=100, mood="normal", max_char=200000):
+def summarize_text(text, words=150, mood="normal", max_char=200000):
     #TODO hacer dos cuadros de dialogo al lado del boton de resumir para poder pasarle las palabras en las que se resumen y el mood
     model_name = "text-bison@001"
     temperature = 0.2
@@ -72,7 +72,7 @@ def summarize_text(text, words=100, mood="normal", max_char=200000):
 
         {text}
 
-        Con esto, genera una descripcion o resumen de unas {words/2} palabras.
+        Con esto, genera una descripcion o resumen de unas {int(words/2)} palabras.
         """
         result = f"El texto solo tiene {len(text)} caracteres, demasiado pequeño para resumirlo en {words}, por lo que aqui va una explicacion:       "
     else:
@@ -84,7 +84,7 @@ def summarize_text(text, words=100, mood="normal", max_char=200000):
         Con esto, genera una resumen de mas o menos {words} palabras.
         """
         result = "Resumen: "
-
+    print("Resumiendo texto...")
     summary = predict_large_language_model(
         project_id=PROJECT,
         model_name=model_name,
@@ -94,6 +94,6 @@ def summarize_text(text, words=100, mood="normal", max_char=200000):
         max_decode_steps=max_decode_steps,
         content=content)
 
-    print(result + summary)
+    print("Done! " + result + summary)
 
     return result + summary
