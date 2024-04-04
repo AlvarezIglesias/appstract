@@ -1,5 +1,5 @@
 # TODO Creo que con la slim sera suficiente, si no instalamos mas cosas luego
-FROM python:3.8-slim
+FROM python:3.10-slim
 
 # Con esto todo se crea dentro de la carpeta /app en el docker  
 WORKDIR /app
@@ -13,17 +13,26 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copiar el resto de archivos
 COPY . .
 
-# Exponer el puerto en el que se ejecutará la aplicación este o el 8080 como querais
+# Expone el puerto en el que se ejecutará la aplicación
 EXPOSE 5000
+
+# Comando para ejecutar la aplicación
+CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "main:app", "--timeout", "0", "--log-level", "debug"]
+
+# Para probar en local:
+    # gunicorn -w 2 -b 0.0.0.0:5000 main:app --timeout 0 --log-level debug
+# ------- V1
+# Exponer el puerto en el que se ejecutará la aplicación este o el 8080 como querais
+# EXPOSE 5000
 
 # Comando para ejecutar la aplicación en local cuando se usa docker run
 # CMD ["flask", "run", "--host=0.0.0.0"]
 
 # Una vez que se suba a cloud hay que usar otro CMD; y no se si tocar algo mas para instalar gunicorn
-CMD ["gunicorn", "-b", ":8080", "app:main"]
+# CMD exec gunicorn --bind :8080 --workers 1 --threads 8 --timeout 0 app:main
 
 # Para ejecutarla: 
-# sudo docker build -t appstract-image .  # Te crea una imagen 
+# sudo docker build -t appstract-image .  # Te crea una imagen
 # Accede a -> http://localhost:5000/
 
 # ! para GCP: 

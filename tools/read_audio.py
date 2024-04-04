@@ -17,20 +17,34 @@ def transcribe_file(speech_file: str) -> speech.RecognizeResponse:
             sample_rate_hertz=16000,
             language_code="es",
         )
+        print("Reconociendo audio...")
+        request = speech.LongRunningRecognizeRequest(
+            config=config,
+            audio=audio,
+        )
 
-        response = client.recognize(config=config, audio=audio)
+        # Make the request
+        operation = client.long_running_recognize(request=request)
 
+        print("Waiting for operation to complete...")
+
+        response = operation.result()
+        print("Done audio!")
         # Each result is for a consecutive portion of the audio. Iterate through
         # them to get the transcripts for the entire audio file.
-        for result in response.results:
-            # The first alternative is the most likely one for this portion.
-            print(f"Transcript: {result.alternatives[0].transcript}")
+
+        # for result in response.results: # Solo para comprobar
+        #     # The first alternative is the most likely one for this portion.
+        #     print(f"Transcript: {result.alternatives[0].transcript}")
 
         return response
     except DefaultCredentialsError as cred:
-        return f"Bad credentials at read_audio: {cred} \n \n please, run: gcloud auth application-default login"
+        print(f"Bad credentials at read_audio: {cred} \n \n please, run: gcloud auth application-default login")
+        return None
     except Exception as e:
-        return f"something was wrong: {e}"
+        print(f"something was wrong: {e}")
+        return None
 
-#transcribe_file(os.path.join("tmp", "mitocondria.mp3"))
+# audio = "tigres.mp3"
+# transcribe_file(os.path.join("tmp", audio))
 

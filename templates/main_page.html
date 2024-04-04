@@ -32,8 +32,8 @@
             font-family: 'Courier New', Courier, monospace;
         }
         .option img {
-            width: 100px; 
-            height: 100px; 
+            width: 100px;
+            height: 100px;
             object-fit: cover;
         }
         .options {
@@ -55,12 +55,70 @@
             color: #2e3550;
         }
         .logo {
-            position: absolute; 
-            bottom: 10px; 
-            right: 10px; 
-            width: 100px; 
-            height: 100px; 
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            width: 300px;
+            height: 70px;
             object-fit: cover;
+        }
+
+        .btn-primary {
+            background-color: #53b5a0;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #3e8c7b;
+        }
+        .loader {
+            border: 16px solid #e9e9e9;
+            border-top: 16px solid #53b5a0;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 2s linear infinite;
+            margin: 0 auto; /* Centrado horizontalmente */
+        }
+
+        #loadingText {
+            text-align: center;
+            font-size: 20px;
+            margin-top: 20px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .modal {
+            display: none; /* Oculto por defecto */
+            position: fixed; /* Fijo en la pantalla */
+            z-index: 1; /* Sobre todo el contenido */
+            left: 0;
+            top: 0;
+            width: 100%; /* Ancho completo */
+            height: 100%; /* Alto completo */
+            overflow: auto; /* Permite el scroll si es necesario */
+            background-color: rgba(0,0,0,0.4); /* Fondo oscuro con transparencia */
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* Centrado vertical y horizontalmente */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Ancho del modal */
         }
     </style>
 </head>
@@ -88,18 +146,71 @@
                 </div>
             </div>
             <div><br></div>
-            <button type="submit" class="btn btn-primary btn-block">Resumir</button>
+            <div>
+                <button type="submit" class="btn btn-primary btn-block">Resumir</button>
+                <!-- TODO añadir textbox para controlar el resultado de resumir -->
+            </div>
+            <div id="modal" class="modal">
+                <div class="modal-content">
+                    <div class="loader"></div>
+                    <div id="loadingText"></div>
+                </div>
+            </div>
         </form>
-
+        <a href="/mainpage/" class="btn btn-primary btn-block">Limpiar</a>
         <div>
             {% if 'abstract' in data %}
-            <p>Resumen: {{ data['abstract'] }}</p>
+            <p> - {{ data['abstract'] }} </p>
             {% endif %}
         </div>
         <div class="footer">
             <a href="#about">¿Qué es Appstract?</a>
         </div>
-        <img class="logo" src="..\\logos\\logo_principal.png" alt="Appstract Logo">
+        <img class="logo" src="/static/img/logo_principal.png" alt="Logo Principal">
     </div>
 </body>
+<script>
+    document.querySelector('form').addEventListener('submit', function(e) {
+        document.getElementById('modal').style.display = 'block';
+        // Aquí puedes añadir cualquier lógica adicional que necesites antes de enviar el formulario
+    });
+
+    var text = [
+        "TLDR?",
+        "Procesando tu archivo",
+        "¿Muy largo para escuchar?",
+        "Esto está en un momento...",
+        "Es interesante, eh",
+        "¿Seguro que no quieres analizarlo tu?",
+        "Extrayendo mensajes importantes",
+        "Procesando...",
+        "Un momentito",
+        "se me ha caido el archivo, tengo que volver a empezar :(",
+        "Recogiendo...",
+        "Esto puede tardar un poco",
+        "Hecho :) en seguida estamos",
+        "No te preocupes, estamos trabajando en ello",
+        "Por favor, ten paciencia",
+        "Estamos cerca de terminar",
+        "Uy... lo que esta diciendo este..."
+    ];
+    var counter = 0;
+    var elem = document.getElementById("loadingText");
+    var inst = setInterval(change, 2000);
+
+    function change() {
+        elem.innerHTML = text[counter];
+        counter++;
+        if (counter >= text.length) {
+            counter = 0;
+            // clearInterval(inst); // Detener después de un ciclo completo
+        }
+    }
+
+    // Asegúrate de ocultar el círculo de carga y el texto de carga una vez que la acción de envío se haya completado
+    // Esto puede hacerse en el callback de una llamada AJAX o en el evento 'load' de la página
+    window.addEventListener('load', function() {
+        document.getElementById('modal').style.display = 'none';
+    });
+</script>
 </html>
