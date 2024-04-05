@@ -55,3 +55,4 @@ Cada commit llevara asociado un changelog acumulativo de los cambios realizados 
 
 Cristian Molina Muñoz, 10/10 de implicación. -> crismom / crismo04
 
+![Logo](https://github.com/AlvarezIglesias/appstract/blob/develop/static/img/logo_principal.png)
