@@ -14,10 +14,11 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Expone el puerto en el que se ejecutará la aplicación
-EXPOSE 5000
+ENV PORT=8080
+EXPOSE 8080
 
 # Comando para ejecutar la aplicación
-CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "main:app", "--timeout", "0", "--log-level", "debug"]
+CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 --timeout 0 --preolad main:app 
 
 # Para probar en local:
     # gunicorn -w 2 -b 0.0.0.0:5000 main:app --timeout 0 --log-level debug

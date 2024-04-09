@@ -17,16 +17,15 @@ def transcribe_file(speech_file: str) -> speech.RecognizeResponse:
             sample_rate_hertz=16000,
             language_code="es",
         )
-        print("Reconociendo audio...")
         request = speech.LongRunningRecognizeRequest(
             config=config,
             audio=audio,
         )
-
+        print(f"Reconociendo audio...")
         # Make the request
         operation = client.long_running_recognize(request=request)
 
-        print("Waiting for operation to complete...")
+        print(f"Waiting for operation to complete... {operation}")
 
         response = operation.result()
         print("Done audio!")
@@ -38,12 +37,12 @@ def transcribe_file(speech_file: str) -> speech.RecognizeResponse:
         #     print(f"Transcript: {result.alternatives[0].transcript}")
 
         return response
-    except DefaultCredentialsError as cred:
-        print(f"Bad credentials at read_audio: {cred} \n \n please, run: gcloud auth application-default login")
-        return None
+    # except DefaultCredentialsError as cred: #TODO esto para ver si es error de credenciales
+    #     print(f"Bad credentials at read_audio: {cred} \n \n please, run: gcloud auth application-default login")
+    #     return None
     except Exception as e:
         print(f"something was wrong: {e}")
-        return None
+        return 500, f"Ha ocurrido un error interno. Por favor, intenta de nuevo más tarde.{e}"
 
 # audio = "tigres.mp3"
 # transcribe_file(os.path.join("tmp", audio))
