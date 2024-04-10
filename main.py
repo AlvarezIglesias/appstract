@@ -2,17 +2,24 @@ import os
 from flask import Flask, flash, request, redirect, url_for, render_template, abort
 from werkzeug.utils import secure_filename
 import random
+from tools.login import app_file_login, init_login
 
-from tools.read_audio import transcribe_file
-from tools.text_to_text import summarize_text
+#from tools.read_audio import transcribe_file
+#from tools.text_to_text import summarize_text
+
+ALLOWED_EXTENSIONS = {'mp3'}
+UPLOAD_FOLDER = './tmp'
+
+app = Flask(__name__)
+app.config['SECRET_KEY'] = str(random.getrandbits(32))
+app.register_blueprint(app_file_login)
+init_login(app)
+
 
 # TODO manage the tmp folder (delete the files an so on)
 if not os.path.exists('tmp'):
     print('Creando el directorio tmp')
     os.makedirs('tmp')
-
-app = Flask(__name__)
-app.config['SECRET_KEY'] = str(random.getrandbits(32))
 
 @app.route('/')
 def langing_page():
@@ -21,9 +28,6 @@ def langing_page():
 @app.route('/mainpage/')
 def main_page():
     return render_template("/main_page.html")
-
-ALLOWED_EXTENSIONS = {'mp3'}
-UPLOAD_FOLDER = './tmp'
 
 def allowed_file(filename):
     return '.' in filename and \
