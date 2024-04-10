@@ -22,7 +22,7 @@ def langing_page():
 def main_page():
     return render_template("/main_page.html")
 
-ALLOWED_EXTENSIONS = {'mp3'}
+ALLOWED_EXTENSIONS = {'mp3', 'wav'}
 UPLOAD_FOLDER = './tmp'
 
 def allowed_file(filename):
