@@ -3,6 +3,7 @@ from flask import Flask, flash, request, redirect, url_for, render_template, abo
 from werkzeug.utils import secure_filename
 import random
 from tools.login import app_file_login, init_login
+from flask_login import login_required
 
 #from tools.read_audio import transcribe_file
 #from tools.text_to_text import summarize_text
@@ -26,6 +27,7 @@ def langing_page():
     return render_template("/landing_page.html")
 
 @app.route('/mainpage/')
+@login_required
 def main_page():
     return render_template("/main_page.html")
 
@@ -34,6 +36,7 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @app.route('/mainpage/file/', methods=['POST', 'GET'])
+@login_required
 def upload_file():
     try:
         if request.method == 'POST':
