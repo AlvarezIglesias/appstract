@@ -31,6 +31,14 @@ def langing_page():
 def main_page():
     return render_template("/main_page.html")
 
+
+@app.route('/faq/')
+def faq_page():
+    return render_template("/faq.html")
+
+ALLOWED_EXTENSIONS = {'mp3', 'wav'}
+UPLOAD_FOLDER = './tmp'
+
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -97,7 +105,7 @@ def upload_file():
     '''
     except Exception as e:
         print(f"Error: {e}")
-        abort(500, description="Ha ocurrido un error interno. Por favor, intenta de nuevo más tarde.")
+        abort(500, description="Ha ocurrido un error interno. Por favor, intentalo de nuevo más tarde.")
 
 
 if __name__ == '__main__':

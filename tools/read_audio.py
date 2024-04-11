@@ -1,17 +1,57 @@
+from  datetime import datetime
 import os
 from google.cloud import speech
-from google.auth.exceptions import DefaultCredentialsError
+from google.cloud import storage
+# from google.auth.exceptions import DefaultCredentialsError
 
+def convert_file_extension(file_path):
+    file_extension = os.path.splitext(file_path)[1]
+    if file_extension != '.mp3':
+        from moviepy import editor
+
+        # Load the audio file
+        audio = editor.AudioFileClip(file_path)
+        exit_file_name = file_path.replace(file_extension, '') + '.mp3'
+        # Convert and save as MP3
+        audio.write_audiofile(exit_file_name)
+        return exit_file_name
+
+        # # ALternative with other library
+        # from pydub import AudioSegment
+        # exit_file_name = file_path.replace(file_extension, '') + '.mp3'
+        # audio = AudioSegment.from_file(file_path, format=file_extension.replace('.', ''))
+        # audio.export(exit_file_name, format="mp3")
+    return file_path
+
+def upload_audio_file(source_file_name):
+    """Subir un archivo a un bucket de Google Cloud Storage.
+
+    Args:
+        source_file_name (str): La ruta del archivo local que se va a subir.
+    """
+    source_file_name = convert_file_extension(source_file_name)
+    timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
+    bucket_name = 'appstract-data'
+    client = storage.Client()
+    # subir archivo
+    bucket = client.bucket(bucket_name)
+    blob = bucket.blob(f'audio_tmp/audio_{timestamp}.mp3')
+    blob.upload_from_filename(source_file_name)
+
+    print(f"Archivo {source_file_name} subido a {blob.public_url}")
+    uri = 'gs://' + bucket_name + '/' + blob.name
+    return uri
 
 def transcribe_file(speech_file: str) -> speech.RecognizeResponse:
     """Transcribe the given audio file."""
     try:
+        uri = upload_audio_file(speech_file)
         client = speech.SpeechClient()
 
         with open(speech_file, "rb") as audio_file:
             content = audio_file.read()
 
-        audio = speech.RecognitionAudio(content=content)
+        audio = speech.RecognitionAudio(uri=uri)
         config = speech.RecognitionConfig(
             encoding=speech.RecognitionConfig.AudioEncoding.MP3,
             sample_rate_hertz=16000,
@@ -44,6 +84,5 @@ def transcribe_file(speech_file: str) -> speech.RecognizeResponse:
         print(f"something was wrong: {e}")
         return 500, f"Ha ocurrido un error interno. Por favor, intenta de nuevo más tarde.{e}"
 
-# audio = "tigres.mp3"
+# audio = "record_out.wav"
 # transcribe_file(os.path.join("tmp", audio))
-
