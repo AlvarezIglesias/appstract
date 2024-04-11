@@ -108,5 +108,5 @@ def upload_file():
         abort(500, description="Ha ocurrido un error interno. Por favor, intentalo de nuevo más tarde.")
 
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8080)
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))

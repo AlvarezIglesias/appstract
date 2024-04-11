@@ -18,22 +18,18 @@ ENV PORT=8080
 EXPOSE 8080
 
 # Comando para ejecutar la aplicación
-CMD exec gunicorn --bind :$PORT --workers 1 --threads 1 --timeout -1 --preolad main:app 
+CMD exec gunicorn -t 0 -w 1 -b 0.0.0.0:8080 main:app --log-level debug
 
 # Para probar en local:
-    # gunicorn -w 2 -b 0.0.0.0:5000 main:app --timeout 0 --log-level debug
+    # gunicorn -t 0 -w 2 -b 127.0.0.1:8080 main:app --log-level debug
 # ------- V1
-# Exponer el puerto en el que se ejecutará la aplicación este o el 8080 como querais
-# EXPOSE 5000
 
 # Comando para ejecutar la aplicación en local cuando se usa docker run
-# CMD ["flask", "run", "--host=0.0.0.0"]
 
-# Una vez que se suba a cloud hay que usar otro CMD; y no se si tocar algo mas para instalar gunicorn
-# CMD exec gunicorn --bind :8080 --workers 1 --threads 8 --timeout 0 app:main
 
-# Para ejecutarla: 
-# sudo docker build -t appstract-image .  # Te crea una imagen
+#! Para ejecutarla en local con docker: 
+# sudo docker build -t appstract-image .  #! Te crea una imagen
+# sudo docker run -it -e PROJECT=amazing-badge-417017 -e REGION=europe-west1 appstract-image
 # Accede a -> http://localhost:5000/
 
 # ! para GCP: 
