@@ -26,7 +26,7 @@ def main_page():
 def faq_page():
     return render_template("/faq.html")
 
-ALLOWED_EXTENSIONS = {'mp3'}
+ALLOWED_EXTENSIONS = {'mp3', 'wav'}
 UPLOAD_FOLDER = './tmp'
 
 def allowed_file(filename):

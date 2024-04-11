@@ -18,7 +18,7 @@ ENV PORT=8080
 EXPOSE 8080
 
 # Comando para ejecutar la aplicación
-CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 --timeout 0 --preolad main:app 
+CMD exec gunicorn --bind :$PORT --workers 1 --threads 1 --timeout -1 --preolad main:app 
 
 # Para probar en local:
     # gunicorn -w 2 -b 0.0.0.0:5000 main:app --timeout 0 --log-level debug
