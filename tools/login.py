@@ -1,5 +1,5 @@
 import flask_login
-from flask import request, redirect, Blueprint
+from flask import request, redirect, Blueprint, render_template
 
 app_file_login = Blueprint('app_file_login',__name__)
 
@@ -29,3 +29,7 @@ def login():
 
     flask_login.login_user(user)
     return redirect("/mainpage")
+
+@app_file_login.route('/register/')
+def register():
+    return render_template('/register.html')
