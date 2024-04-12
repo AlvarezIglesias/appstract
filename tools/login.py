@@ -15,6 +15,7 @@ users = {"admin": User("admin", "1234")}
 invite_code = 1000
 
 def init_login(app):
+    global invite_code
     login_manager.init_app(app)
     login_manager.login_view = '/'
     invite_code = random.randrange(1000, 9999)
@@ -42,6 +43,7 @@ def register():
 def new_user():
     user = User(request.form["user"], request.form["pass"])
     user_code = int(request.form["code"])
+    print(user_code, " vs ", invite_code)
 
     if user_code != invite_code:
         return redirect("/")
