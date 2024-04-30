@@ -10,24 +10,16 @@
     display: flex;
     height: 100vh;
   }
-  .left-side {
-    background: grey;
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-image: url('/static/img/landing_page_background.jpg'); /* Add your image path here */
-    background-size: cover;
-    background-repeat: no-repeat;
-    filter: grayscale(100%);
-  }
-  .right-side {
+  .center-side {
     background: #52b5a0;
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin: auto;
+
+
   }
   .login-form {
     width: 300px;
@@ -36,31 +28,29 @@
 </head>
 <body>
 <div class="login-container">
-  <div class="left-side col-md-9">
-    <!-- Abstract mountain and sun/moon icon here -->
-  </div>
-  <div class="right-side col-md-3" style="	transform: skewX(+11deg) scale(1.5,1.5); ">
-    <div style="	transform: skewX(-11deg) scale(0.75,0.75); ">
+  <div class="center-side col-md-3" style="	transform: skewX(+11deg) scale(1.5,1.5); ">
+    <div style="transform: skewX(-11deg) scale(0.75,0.75); ">
       <h1 class="text-white mb-4">APPSTRACT</h1>
       <p class="text-white">Resume tu contenido y gana tiempo</p>
       <p class="text-white mb-4" action="/faq/"><a href="/faq/">¿Qué es Appstract?</a></p>
-      <form method="POST" class="login-form" action="/login/" enctype="multipart/form-data">
+      <form method="POST" class="login-form" action="/new_user/" enctype="multipart/form-data">
         <div class="form-group">
           <input name="user" type="text" class="form-control" placeholder="Nombre" required>
         </div>
         <div class="form-group">
           <input name="pass" type="password" class="form-control" placeholder="Contraseña" required>
         </div>
-        <a>
-        <button type="submit" class="btn btn-primary btn-block">Iniciar sesión</button>
-        </a>
-      </form>
-      <p class="text-white mt-4">O regístrate si aun no lo has hecho</p>
-      <div class="form-group" style="display: flex;">
-        <form action="/register">
-        <button type="submit" class="btn btn-secondary" >Regístrate</button>
-        </form> 
+        <div class="form-group">
+            <input name="pass" type="password" class="form-control" placeholder="Repite contraseña" required>
+        </div>
+        <div class="form-group">
+            <input name="code" type="password" class="form-control" placeholder="Invitación" required>
+        </div>
+      
+      <div class="form-group" >
+        <button type="submit" class="btn btn-primary btn-block" >Regístrate</button>
       </div>
+    </form>
     </div>
   </div>
 </div>
