@@ -1,3 +1,8 @@
+## 2024-05-03 - feature/cmolina/videoTest
+
+- Cambiado el main para arreglarlo y poder subirlo a una VM de GCP
+
+## ---- otros cambios pendientes 
 
 ## 2024-03-30 - feature/cmolina/videoTest
 
@@ -11,6 +16,8 @@
 
 - Creacion de la carpeta de tools donde se guardaran los python auxiliares de la aplicacion
 - Creacion de video_to_audio.py usando la libreria moviepy
+
+## ---- otros cambios pendientes 
 
 ## 2024-03-13 - feature/cmolina/docker
 
