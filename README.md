@@ -30,6 +30,16 @@ La aplicacion viene con un dockerfile para que sea mas sencillo desplegarla, par
 3. gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin https://europe-west1-docker.pkg.dev/
 4. gcloud run deploy  -- (Seguir las instrucciones, region 16, )
 
+### Subir a una VM de goolge:
+1. levantar una maquina virtual y abrirla para conexiones externas
+2. lanzar los siguientes comandos:
+  - rm -rf appstract/
+  - git clone https://github.com/AlvarezIglesias/appstract.git
+  - cd appstract/
+  - source path/to/venv/bin/activate
+  - pip install -r requirements.txt
+  - python3 main.py
+
 ## Utilizaremos control de versiones con la siguiente estructura:
 - **Rama main:** para los cambios finales antes de un hito.
 - **Rama develop** para los cambios en proceso, pero finalizados y para probar.

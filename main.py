@@ -2,6 +2,8 @@ import os
 from flask import Flask, flash, request, redirect, url_for, render_template, abort
 from werkzeug.utils import secure_filename
 import random
+from tools.read_audio import transcribe_file
+from tools.text_to_text import summarize_text
 from tools.login import app_file_login, init_login
 from flask_login import login_required
 
@@ -109,4 +111,4 @@ def upload_file():
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 8080)), debug=True)
