@@ -38,7 +38,7 @@ def main_page():
 def faq_page():
     return render_template("/faq.html")
 
-ALLOWED_EXTENSIONS = {'mp3', 'wav'}
+ALLOWED_EXTENSIONS = {'mp3', 'wav', 'mp4', 'txt'}
 UPLOAD_FOLDER = './tmp'
 
 def allowed_file(filename):
@@ -48,19 +48,18 @@ def allowed_file(filename):
 @app.route('/mainpage/file/', methods=['POST', 'GET'])
 @login_required
 def upload_file():
+    print("file")
     try:
         if request.method == 'POST':
-            if 'file_audio' not in request.files:
-                flash('No file part')
-                return redirect(request.url)
-            file = request.files['file_audio']
-            if file.filename == '':
-                flash('No selected file')
-                return redirect(request.url)
-            if file and allowed_file(file.filename):
-                filename = secure_filename(file.filename)
-                filepath = os.path.join(UPLOAD_FOLDER, filename)
-                file.save(filepath)
+            print("post")
+            if request.files['file_audio'].filename != '':
+                print("audio")
+                file = request.files['file_audio']
+
+                if file and allowed_file(file.filename):
+                        filename = secure_filename(file.filename)
+                        filepath = os.path.join(UPLOAD_FOLDER, filename)
+                        file.save(filepath)
 
                 res = transcribe_file(filepath)
                 print(f"respuesta: {res}")
@@ -73,8 +72,33 @@ def upload_file():
                     print(f"Ha habido un problema con el audio: {res}")
 
                 print(data)
-
                 return render_template("/main_page.html", data={"abstract" : data})
+            
+            elif request.files['file_text'].filename != '':
+                print("txt")
+                file = request.files['file_text']
+
+                if file.filename == '':
+                    flash('No selected file')
+                    return redirect(request.url)
+
+                if file and allowed_file(file.filename):
+                        filename = secure_filename(file.filename)
+                        filepath = os.path.join(UPLOAD_FOLDER, filename)
+                        file.save(filepath)
+
+                tmp_file = open(filepath, "r", encoding="utf-8")
+
+                text = tmp_file.read()
+                print(text)
+                data = str(summarize_text(text))
+
+                print(data)
+                return render_template("/main_page.html", data={"abstract" : data})
+                
+            else:
+                flash('No file part')
+                return redirect(request.url)
 
         #TODO por dios devolver un error más descriptivo y con fotos de gatitos
         return '''
