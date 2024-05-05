@@ -123,8 +123,8 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="title">
+    <div class="container" style="text-align: center;">
+        <div class="title" >
             ¿Qué quieres hacer?
         </div>
         <form method="POST" action="/mainpage/file/" enctype="multipart/form-data">
@@ -157,7 +157,9 @@
                 </div>
             </div>
         </form>
-        <a href="/mainpage/" class="btn btn-primary btn-block">Limpiar</a>
+        <a href="/mainpage/" class="btn btn-primary btn-block">Limpiar archivos</a>
+        <br>
+        <a href="/" class="btn btn-primary btn-block" style="position: relative; text-align: left;  background-color: white; color: black;">Sign out</a>
         <div>
             {% if 'abstract' in data %}
             <p> {{ data['abstract'] }} </p>

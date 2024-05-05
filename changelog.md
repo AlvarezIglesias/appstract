@@ -1,13 +1,18 @@
+## 2024-05-03 - feature/cmolina/updateVM2
+
+- Changed the main to fix it so that it can be uploaded to a GCP VM, thats includes:
+    - Changes in html to manage better problems whit login
+    - Changes in login to include bigquery and users in that mode
+
+
 ## 2024-05-05 - feature/Corrochano/TextToTextUnification
 
 - "TextToText" functional alongside "Audio to Text"
 - Restructured the main.py so that both work, and preparation for "VideoToText"
 
-## 2024-05-03 - feature/cmolina/videoTest
+## 2024-05-03 - feature/cmolina/updateVM
 
-- Cambiado el main para arreglarlo y poder subirlo a una VM de GCP
-
-## ---- otros cambios pendientes 
+- Changed the main to fix it so that it can be uploaded to a GCP VM
 
 ## 2024-04-10 - feature/Corrochano/faq
 
@@ -15,6 +20,7 @@
 - back buttons were added
 
 ## 2024-04-09 - feature/Corrochano/faq
+
 - First html approach to final solution
 
 ## 2024-04-02 - feature/Corrochano/TextToText
@@ -34,18 +40,16 @@
 
 ## 2024-03-30 - feature/cmolina/videoTest
 
-- Añadida una secuencia de carga para hacer la espera mas amena
-- Nuevo estilo para los botones de la main page
-- Fix del logo
-- Nuevos propts para la creacion de texto, y diferenciacion segun la longitud.
-- Añadidas mejoras por implementar en la creacion de texto, como atributos de longitud y mood
+- Added a loading sequence to make the wait more enjoyable
+- New style for main page buttons
+- Fixed the logo
+- New propts for text creation, and differentiation according to length.
+- Added improvements to be implemented in text creation, like length and mood attributes.
 
 ## 2024-03-30 - feature/cmolina/videoTest
 
-- Creacion de la carpeta de tools donde se guardaran los python auxiliares de la aplicacion
-- Creacion de video_to_audio.py usando la libreria moviepy
-
-## ---- otros cambios pendientes 
+- Creation of the tools folder where the application's auxiliary python files will be stored.
+- Creation of video_to_audio.py using moviepy library
 
 ## 2024-03-29 - feature/Corrochano/AudioToText
 
