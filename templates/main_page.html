@@ -132,17 +132,17 @@
                 <div class="option">
                     <img src="https://cdn.iconscout.com/icon/free/png-256/free-sound-2451537-2082547.png" alt="Audio a Texto">
                     <h2>Audio a Texto</h2>
-                    <input type="file" accept=".mp3" name="file_audio">
+                    <input type="file" accept=".mp3" name="file_audio" id="file_audio">
                 </div>
                 <div class="option">
                     <img src="https://cdn.iconscout.com/icon/free/png-256/free-youtube-292-893504.png" alt="Audio a Texto">
                     <h2>Video a Texto</h2>
-                    <input type="file" accept=".mp4" name="file_video">
+                    <input type="file" accept=".mp4" name="file_video" id="file_video">
                 </div>
                 <div class="option">
                     <img src="https://cdn.iconscout.com/icon/free/png-256/free-message-2367724-1976874.png" alt="Audio a Texto">
                     <h2>Texto a Texto</h2>
-                    <input type="file" accept=".txt" name="file_text">
+                    <input type="file" accept=".txt" name="file_text" id="file_text">
                 </div>
             </div>
             <div><br></div>
@@ -213,4 +213,50 @@
         document.getElementById('modal').style.display = 'none';
     });
 </script>
+
+<script>
+    function getExtension(filename) {
+        var parts = filename.split('.');
+        return parts[parts.length - 1];
+      }
+
+    document.addEventListener('dragover', (e) => {
+        e.preventDefault()
+    });
+    document.addEventListener('drop', (e) => {
+        drop_audio = document.getElementById("file_audio");
+        drop_video = document.getElementById("file_video");
+        drop_text = document.getElementById("file_text");
+        console.log(e.dataTransfer.files[0]);
+        var ext = getExtension(e.dataTransfer.files[0].name);
+        switch (ext.toLowerCase()) {
+            case 'mp3':
+            drop_audio.files = e.dataTransfer.files;
+            drop_video.value = ""
+            drop_text.value = ""
+            break;
+            case 'mp4':
+            drop_video.files = e.dataTransfer.files;
+            drop_audio.value = ""
+            drop_text.value = ""
+            break;
+            case 'txt':
+            drop_text.files = e.dataTransfer.files;
+            drop_audio.value = ""
+            drop_video.value = ""
+            break;
+        }
+        e.preventDefault()
+        
+    });
+</script>
+
 </html>
+
+document.addEventListener('dragover', (e) => {
+    e.preventDefault()
+});
+document.addEventListener('drop', (e) => {
+    document.getElementById('file').files = e.dataTransfer.files;
+    e.preventDefault()
+});
