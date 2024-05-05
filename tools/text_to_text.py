@@ -64,6 +64,7 @@ def summarize_text(text, words=150, mood="normal", max_char=200000):
     max_decode_steps = 1024
     top_p = 0.8
     top_k = 40
+    print("Longitud del texto: ", len(text))
     if len(text) > max_char:
         return "El archivo multimedia elegido es demasiado grande para procesarlo."
     elif len(text) <= words:
