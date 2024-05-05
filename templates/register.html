@@ -24,6 +24,9 @@
   .login-form {
     width: 300px;
   }
+  .white-link {
+    color: white!important;
+  }
 </style>
 </head>
 <body>
@@ -32,8 +35,9 @@
     <div style="transform: skewX(-11deg) scale(0.75,0.75); ">
       <h1 class="text-white mb-4">APPSTRACT</h1>
       <p class="text-white">Resume tu contenido y gana tiempo</p>
-      <p class="text-white mb-4" action="/faq/"><a href="/faq/">¿Qué es Appstract?</a></p>
-      <form method="POST" class="login-form" action="/new_user/" enctype="multipart/form-data">
+      <p ><a href="/faq/" class="text-white mb-4 white-link">¿Qué es Appstract?</a>
+      </p>
+      <form method="POST" class="login-form" action="/new_user/" enctype="multipart/form-data" id="registrationForm">
         <div class="form-group">
           <input name="user" type="text" class="form-control" placeholder="Nombre" required>
         </div>
@@ -41,7 +45,7 @@
           <input name="pass" type="password" class="form-control" placeholder="Contraseña" required>
         </div>
         <div class="form-group">
-            <input name="pass" type="password" class="form-control" placeholder="Repite contraseña" required>
+            <input name="pass_repeat" type="password" class="form-control" placeholder="Repite contraseña" required>
         </div>
         <div class="form-group">
             <input name="code" type="password" class="form-control" placeholder="Invitación" required>
@@ -50,11 +54,43 @@
       <div class="form-group" >
         <button type="submit" class="btn btn-primary btn-block" >Regístrate</button>
       </div>
+      </br>
+      <div class="form-group" >
+        <button class="btn btn-primary btn-block" onclick="window.location.href='/'">Volver a la página de inicio</button>
+      </div>
     </form>
     </div>
   </div>
 </div>
-
+<script>
+document.querySelector('.login-form').addEventListener('submit', function(event) {
+  event.preventDefault(); // Evita el envío del formulario
+  var formData = new FormData(this);
+  fetch('/login/', {
+    method: 'POST',
+    body: formData
+  })
+  .then(response => {
+    if (response.headers.get("Content-Type").includes("application/json")) {
+      return response.json(); // Procesa la respuesta
+    } else {
+      window.location.href = response.url; // Redirige al usuario si la respuesta no es JSON
+    }
+  })
+  .then(data => {
+    if (data && data.error) {
+      document.getElementById('error-messages').textContent = data.error;
+      document.getElementById('error-messages').style.display = 'block'; // Muestra el div de mensajes de error
+    } else if (data && data.success) {
+      window.location.href = '/mainpage'; // Redirige al usuario si el inicio de sesión fue exitoso
+    }
+  })
+  .catch(error => {
+    document.getElementById('error-messages').textContent = 'Error al iniciar sesión.'; 
+    document.getElementById('error-messages').style.display = 'block';
+  });
+});
+</script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>

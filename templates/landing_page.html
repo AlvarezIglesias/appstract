@@ -35,6 +35,15 @@
 </style>
 </head>
 <body>
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <ul class="alert alert-danger">
+      {% for category, message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
 <div class="login-container">
   <div class="left-side col-md-9">
     <!-- Abstract mountain and sun/moon icon here -->
@@ -61,10 +70,41 @@
         <button type="submit" class="btn btn-secondary" >Regístrate</button>
         </form> 
       </div>
+      <div id="error-messages" class="alert alert-danger mt-3" role="alert" style="display:none;"></div>
     </div>
   </div>
 </div>
 
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script>
+document.querySelector('.login-form').addEventListener('submit', function(event) {
+  event.preventDefault(); // Evita el envío del formulario
+  var formData = new FormData(this);
+  fetch('/login/', {
+    method: 'POST',
+    body: formData
+  })
+  .then(response => {
+    if (response.headers.get("Content-Type").includes("application/json")) {
+      return response.json(); // Procesa la respuesta
+    } else {
+      window.location.href = response.url; // Redirige al usuario si la respuesta no es JSON
+    }
+  })
+  .then(data => {
+    if (data && data.error) {
+      document.getElementById('error-messages').textContent = data.error;
+      document.getElementById('error-messages').style.display = 'block'; // Muestra el div de mensajes de error
+    } else if (data && data.success) {
+      window.location.href = '/mainpage'; // Redirige al usuario si el inicio de sesión fue exitoso
+    }
+  })
+  .catch(error => {
+    document.getElementById('error-messages').textContent = 'Error al iniciar sesión.'; 
+    document.getElementById('error-messages').style.display = 'block';
+  });
+});
+
+</script>
 </body>
 </html>
