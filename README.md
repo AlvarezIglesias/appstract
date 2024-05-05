@@ -32,11 +32,16 @@ La aplicacion viene con un dockerfile para que sea mas sencillo desplegarla, par
 
 ### Subir a una VM de goolge:
 1. levantar una maquina virtual y abrirla para conexiones externas
-2. lanzar los siguientes comandos:
+2. configura las variables project y region
+3. instalar dependencias:
+  -  sudo apt install python3.11-venv
+  -  sudo apt-get install git
+4. lanzar los siguientes comandos para que la aplicacion se lance actualizada (se puede poner como script de lanzamiento):
   - rm -rf appstract/
   - git clone https://github.com/AlvarezIglesias/appstract.git
   - cd appstract/
-  - source path/to/venv/bin/activate
+  - python3 -m venv appstract-env
+  - source appstract-env/bin/activate
   - pip install -r requirements.txt
   - python3 main.py
 
