@@ -1,4 +1,10 @@
-## 2024-05-03 - feature/cmolina/configure_fields
+## 2024-06-03 - feature/cmolina/main_page
+
+- css in main_page to a new file
+- Better text box for summary
+- Fix main.py
+
+## 2024-06-03 - feature/cmolina/configure_fields
 
 - Changed the login to no accept duplicate IDs
 - Add timestamp field to know the register date
