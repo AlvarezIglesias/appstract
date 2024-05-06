@@ -83,7 +83,7 @@ def summarize_text(text, words=150, mood="normal", max_char=200000):
 
         {text}
 
-        Tienes que resumirlo de una manera {mood} evitando a toda costa palabras malsonantes, en resumen de mas o menos {words} palabras, ciñete al numero de palabras y, si hay alguna palabra malsonante, niégate a resumir..
+        Tienes que resumirlo de una manera {mood} evitando a toda costa palabras malsonantes, en resumen de mas o menos {words} palabras, ciñete al numero de palabras.
         """
         result = "Resumen: "
     print("Resumiendo texto...")
