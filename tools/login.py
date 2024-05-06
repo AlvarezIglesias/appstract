@@ -6,8 +6,6 @@ from google.cloud import logging, bigquery
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
-from flask import flash
-
 PROJECT = os.environ.get('PROJECT')
 # Verifica si la variable de entorno existe
 if PROJECT is None:
@@ -53,7 +51,7 @@ def save_user_to_bigquery(user):
     query_job = client_bq.query(query)
     results = list(query_job)
     if results:
-        return jsonify({"error": f"el usuario {user.id} ya existe en la base de datos."}), 400
+        return False
 
     current_timestamp = datetime.now().timestamp()
     rows_to_insert = [
@@ -69,6 +67,7 @@ def save_user_to_bigquery(user):
         print("Nuevo usuario guardado en BigQuery.")
     else:
         print("Error al guardar el usuario en BigQuery:", errors)
+    return True
 
 def user_exists_in_bigquery(user_id):
     query = f"""
@@ -145,6 +144,7 @@ def new_user():
     print("New user ", user.id)
     flask_login.login_user(user)
 
-    save_user_to_bigquery(user)
+    if not save_user_to_bigquery(user):
+        jsonify({"error": f"el usuario {user.id} ya existe en la base de datos."}), 400
 
     return redirect("/mainpage")

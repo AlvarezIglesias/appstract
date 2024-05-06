@@ -53,9 +53,15 @@ def upload_file():
     try:
         if request.method == 'POST':
             print("post")
-            num_palabras = request.form.get('num_palabras', '100')
-            num_palabras = int(num_palabras) or 50
-            modo_resumen = request.form.get('modo_resumen', 'neutro')
+            num_palabras = request.form.get('num_palabras')
+            if num_palabras is None: num_palabras = '100'
+            try:
+                num_palabras = int(num_palabras)
+            except:
+                num_palabras = 50
+            modo_resumen = request.form.get('modo_resumen')
+            if modo_resumen is None: modo_resumen = 'neutro'
+
             if request.files['file_audio'].filename != '':
                 print("audio")
                 file = request.files['file_audio']
@@ -77,7 +83,7 @@ def upload_file():
 
                 print(data)
                 return render_template("/main_page.html", data={"abstract" : data})
-            
+
             elif request.files['file_text'].filename != '':
                 print("txt")
                 file = request.files['file_text']
@@ -99,7 +105,7 @@ def upload_file():
 
                 print(data)
                 return render_template("/main_page.html", data={"abstract" : data})
-            
+
             elif request.files['file_video'].filename != '':
                 print("mp4")
                 file = request.files['file_video']
@@ -125,7 +131,7 @@ def upload_file():
 
                 print(data)
                 return render_template("/main_page.html", data={"abstract" : data})
-            
+
             else:
                 flash('No file part')
                 return redirect(request.url)
