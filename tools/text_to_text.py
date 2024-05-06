@@ -65,9 +65,10 @@ def summarize_text(text, words=150, mood="normal", max_char=200000):
     top_p = 0.8
     top_k = 40
     print("Longitud del texto: ", len(text))
+    print("Número palabras: ", len(text.split(' ')) - 1)
     if len(text) > max_char:
         return "El archivo multimedia elegido es demasiado grande para procesarlo."
-    elif len(text) <= words:
+    elif (len(text.split(' ')) - 1) <= words:
         content = f"""
         Tengo esto:
 
@@ -75,7 +76,7 @@ def summarize_text(text, words=150, mood="normal", max_char=200000):
 
         Para ello, tienes que resumirlo de una manera {mood}, en resumen de mas o menos {len(text)/5} palabras, ciñete al numero de palabras.
         """
-        result = f"El texto solo tiene {len(text)} caracteres, demasiado pequeño para resumirlo en {words}, pero hare lo quee pueda. Resumen:       "
+        result = f"El texto solo tiene {len(text.split(' ')) - 1} palabras, demasiado pequeño para resumirlo en {words}, pero hare lo que pueda. Resumen:       "
     else:
         content = f"""
         Tengo este texto:

@@ -1,3 +1,7 @@
+## 2024-05-06 - Corrochano
+
+- Final hot fix to little details
+
 ## 2024-05-06 - feature/Corrochano/TextToTextUnification
 
 - Update the logo to a cleanest version
