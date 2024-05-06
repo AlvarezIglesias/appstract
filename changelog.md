@@ -1,17 +1,21 @@
-## 2024-06-03 - feature/cmolina/main_page
+## 2024-05-06 - feature/Corrochano/TextToTextUnification
+
+- Update the logo to a cleanest version
+
+## 2024-05-06 - feature/cmolina/main_page
 
 - css in main_page to a new file
 - Better text box for summary
 - Fix main.py
 
-## 2024-06-03 - feature/cmolina/configure_fields
+## 2024-05-06 - feature/cmolina/configure_fields
 
 - Changed the login to no accept duplicate IDs
 - Add timestamp field to know the register date
 - Add fields to configure the summary (num_words & style)
 - New prompt query for summarize text
 
-## 2024-05-03 - feature/cmolina/updateVM2
+## 2024-05-05 - feature/cmolina/updateVM2
 
 - Changed the main to fix it so that it can be uploaded to a GCP VM, thats includes:
     - Changes in html to manage better problems whit login
