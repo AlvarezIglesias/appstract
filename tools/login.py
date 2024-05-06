@@ -1,3 +1,4 @@
+from datetime import datetime
 import flask_login
 import random, os
 from flask import jsonify, request, redirect, Blueprint, render_template
@@ -37,6 +38,7 @@ def save_user_to_bigquery(user):
     fields = [
         bigquery.SchemaField("id", "STRING", mode="REQUIRED"),
         bigquery.SchemaField("password", "STRING", mode="REQUIRED"),
+        bigquery.SchemaField("creation_timestamp", "TIMESTAMP", mode="REQUIRED")
     ]
 
     # Crea la tabla si no existe
@@ -45,9 +47,24 @@ def save_user_to_bigquery(user):
         client_bq.create_table(table)  # Crea la tabla si no existe
     except Exception:
         pass
-    rows_to_insert = [dict(id=user.id, password=user.password)]
-    errors = client_bq.insert_rows_json(table, rows_to_insert)
 
+    # comprueba usuarios duplicados
+    query = f"SELECT id FROM `{table_id}` WHERE id = '{user.id}'"
+    query_job = client_bq.query(query)
+    results = list(query_job)
+    if results:
+        return jsonify({"error": f"el usuario {user.id} ya existe en la base de datos."}), 400
+
+    current_timestamp = datetime.now().timestamp()
+    rows_to_insert = [
+        dict(
+            id=user.id,
+            password=user.password,
+            creation_timestamp=current_timestamp
+        )
+    ]
+
+    errors = client_bq.insert_rows_json(table, rows_to_insert)
     if errors == []:
         print("Nuevo usuario guardado en BigQuery.")
     else:

@@ -4,6 +4,15 @@ from google.cloud import speech
 from google.cloud import storage
 # from google.auth.exceptions import DefaultCredentialsError
 
+PROJECT = os.environ.get('PROJECT')
+# Verifica si la variable de entorno existe
+if PROJECT is None:
+    from credentials.ids import PROJECT
+
+REGION = os.environ.get('REGION')
+if PROJECT is None:
+    from credentials.ids import REGION
+
 def convert_file_extension(file_path):
     file_extension = os.path.splitext(file_path)[1]
     if file_extension != '.mp3':
@@ -32,7 +41,7 @@ def upload_audio_file(source_file_name):
     source_file_name = convert_file_extension(source_file_name)
     timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
     bucket_name = 'appstract-data'
-    client = storage.Client()
+    client = storage.Client(project=PROJECT)
     # subir archivo
     bucket = client.bucket(bucket_name)
     blob = bucket.blob(f'audio_tmp/audio_{timestamp}.mp3')

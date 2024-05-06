@@ -9,6 +9,5 @@ moviepy==1.0.3
 vertexai==1.46.0
 Werkzeug==3.0.1
 flask_login==0.6.3
-pandas==2.2.2
 # waitress==3.0.0
 # pydub==0.25.1

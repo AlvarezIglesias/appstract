@@ -53,6 +53,9 @@ def upload_file():
     try:
         if request.method == 'POST':
             print("post")
+            num_palabras = request.form.get('num_palabras', '100')
+            num_palabras = int(num_palabras) or 50
+            modo_resumen = request.form.get('modo_resumen', 'neutro')
             if request.files['file_audio'].filename != '':
                 print("audio")
                 file = request.files['file_audio']
@@ -68,7 +71,7 @@ def upload_file():
                 if res.results:
                     for result in res.results:
                         data += result.alternatives[0].transcript + ' '
-                    data = str(summarize_text(data))
+                    data = str(summarize_text(data,words=num_palabras, mood=modo_resumen))
                 else:
                     print(f"Ha habido un problema con el audio: {res}")
 
@@ -92,7 +95,7 @@ def upload_file():
 
                 text = tmp_file.read()
                 print(text)
-                data = str(summarize_text(text))
+                data = str(summarize_text(text,words=num_palabras, mood=modo_resumen))
 
                 print(data)
                 return render_template("/main_page.html", data={"abstract" : data})
@@ -116,7 +119,7 @@ def upload_file():
                 if res.results:
                     for result in res.results:
                         data += result.alternatives[0].transcript + ' '
-                    data = str(summarize_text(data))
+                    data = str(summarize_text(data,words=num_palabras, mood=modo_resumen))
                 else:
                     print(f"Ha habido un problema con el audio: {res}")
 

@@ -1,3 +1,10 @@
+## 2024-05-03 - feature/cmolina/configure_fields
+
+- Changed the login to no accept duplicate IDs
+- Add timestamp field to know the register date
+- Add fields to configure the summary (num_words & style)
+- New prompt query for summarize text
+
 ## 2024-05-03 - feature/cmolina/updateVM2
 
 - Changed the main to fix it so that it can be uploaded to a GCP VM, thats includes:
