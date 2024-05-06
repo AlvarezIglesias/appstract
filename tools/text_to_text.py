@@ -69,20 +69,20 @@ def summarize_text(text, words=150, mood="normal", max_char=200000):
         return "El archivo multimedia elegido es demasiado grande para procesarlo."
     elif len(text) <= words:
         content = f"""
-        Te voy a pasar un pequeño texto o una serie de caracteres, tienes que resumirlo de una manera {mood}:
+        Tengo esto:
 
         {text}
 
-        Con esto, genera una descripcion o resumen de unas {int(words/2)} palabras.
+        Para ello, tienes que resumirlo de una manera {mood}, en resumen de mas o menos {len(text)/5} palabras, ciñete al numero de palabras.
         """
-        result = f"El texto solo tiene {len(text)} caracteres, demasiado pequeño para resumirlo en {words}, por lo que aqui va una explicacion:       "
+        result = f"El texto solo tiene {len(text)} caracteres, demasiado pequeño para resumirlo en {words}, pero hare lo quee pueda. Resumen:       "
     else:
         content = f"""
-        Te voy a pasar un texto o una serie de caracteres, tienes que resumirlo de una manera {mood}:
+        Tengo este texto:
 
         {text}
 
-        Con esto, genera una resumen de mas o menos {words} palabras.
+        Tienes que resumirlo de una manera {mood}, en resumen de mas o menos {words} palabras, ciñete al numero de palabras.
         """
         result = "Resumen: "
     print("Resumiendo texto...")

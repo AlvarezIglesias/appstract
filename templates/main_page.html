@@ -120,6 +120,30 @@
             border: 1px solid #888;
             width: 80%; /* Ancho del modal */
         }
+        .input-group {
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-label {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .input-field {
+            font-size: 14px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            transition: border-color 0.3s;
+        }
+
+        .input-field:focus {
+            border-color: #53b5a0;
+            outline: none;
+        }
     </style>
 </head>
 <body>
@@ -147,8 +171,16 @@
             </div>
             <div><br></div>
             <div>
+                <div><br></div>
+                <div>
+                    <label for="num_palabras"  class="input-label">Número de palabras para resumir:</label>
+                    <input type="text" id="num_palabras" name="num_palabras" class="input-field" placeholder="Ej: 100">
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <label for="modo_resumen"  class="input-label">Modo del resumen:</label>
+                    <input type="text" id="modo_resumen" name="modo_resumen" class="input-field" placeholder="Ej: alegre, gracioso">
+                </div>
+                <div><br></div>
                 <button type="submit" class="btn btn-primary btn-block">Resumir</button>
-                <!-- TODO añadir textbox para controlar el resultado de resumir -->
             </div>
             <div id="modal" class="modal">
                 <div class="modal-content">
@@ -158,7 +190,7 @@
             </div>
         </form>
         <a href="/mainpage/" class="btn btn-primary btn-block">Limpiar archivos</a>
-        <br>
+        <div><br></div><div><br></div><div><br></div>
         <a href="/" class="btn btn-primary btn-block" style="position: relative; text-align: left;  background-color: white; color: black;">Sign out</a>
         <div>
             {% if 'abstract' in data %}
@@ -254,11 +286,3 @@
 </script>
 
 </html>
-
-document.addEventListener('dragover', (e) => {
-    e.preventDefault()
-});
-document.addEventListener('drop', (e) => {
-    document.getElementById('file').files = e.dataTransfer.files;
-    e.preventDefault()
-});

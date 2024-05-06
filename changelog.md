@@ -1,5 +1,11 @@
 ## 2024-05-03 - feature/cmolina/updateVM2
 
+- Changed the login to no acept duplicate IDs
+- add timestamp field to know the register date
+- add fields to configure the sumary (num_words & style)
+
+## 2024-05-03 - feature/cmolina/updateVM2
+
 - Changed the main to fix it so that it can be uploaded to a GCP VM, thats includes:
     - Changes in html to manage better problems whit login
     - Changes in login to include bigquery and users in that mode
