@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Appstract Login</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<style>
+  .login-container {
+    display: flex;
+    height: 100vh;
+  }
+  .center-side {
+    background: #52b5a0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+
+
+  }
+  .login-form {
+    width: 300px;
+  }
+  .white-link {
+    color: white!important;
+  }
+</style>
+</head>
+<body>
+<div class="login-container">
+  <div class="center-side col-md-3" style="	transform: skewX(+11deg) scale(1.5,1.5); ">
+    <div style="transform: skewX(-11deg) scale(0.75,0.75); ">
+      <h1 class="text-white mb-4">APPSTRACT</h1>
+      <p class="text-white">Resume tu contenido y gana tiempo</p>
+      <p ><a href="/faq/" class="text-white mb-4 white-link">¿Qué es Appstract?</a>
+      </p>
+      <form method="POST" class="login-form" action="/new_user/" enctype="multipart/form-data" id="registrationForm">
+        <div class="form-group">
+          <input name="user" type="text" class="form-control" placeholder="Nombre" required>
+        </div>
+        <div class="form-group">
+          <input name="pass" type="password" class="form-control" placeholder="Contraseña" required>
+        </div>
+        <div class="form-group">
+            <input name="pass_repeat" type="password" class="form-control" placeholder="Repite contraseña" required>
+        </div>
+        <div class="form-group">
+            <input name="code" type="password" class="form-control" placeholder="Invitación" required>
+        </div>
+      
+      <div class="form-group" >
+        <button type="submit" class="btn btn-primary btn-block" >Regístrate</button>
+      </div>
+      </br>
+      <div class="form-group" >
+        <button class="btn btn-primary btn-block" onclick="window.location.href='/'">Volver a la página de inicio</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+<script>
+
+</script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

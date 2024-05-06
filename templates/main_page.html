@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appstract</title>
+    <link rel="stylesheet" href="/static/styles/main_page.css">
+</head>
+<body>
+    <div class="container" style="text-align: center;">
+        <div class="title" >
+            ¿Qué quieres hacer?
+        </div>
+        <form method="POST" action="/mainpage/file/" enctype="multipart/form-data">
+            <div class="options">
+                <div class="option">
+                    <img src="https://cdn.iconscout.com/icon/free/png-256/free-sound-2451537-2082547.png" alt="Audio a Texto">
+                    <h2>Audio a Texto</h2>
+                    <input type="file" accept=".mp3" name="file_audio" id="file_audio">
+                </div>
+                <div class="option">
+                    <img src="https://cdn.iconscout.com/icon/free/png-256/free-youtube-292-893504.png" alt="Audio a Texto">
+                    <h2>Video a Texto</h2>
+                    <input type="file" accept=".mp4" name="file_video" id="file_video">
+                </div>
+                <div class="option">
+                    <img src="https://cdn.iconscout.com/icon/free/png-256/free-message-2367724-1976874.png" alt="Audio a Texto">
+                    <h2>Texto a Texto</h2>
+                    <input type="file" accept=".txt" name="file_text" id="file_text">
+                </div>
+            </div>
+            <div><br></div>
+            <div>
+                <div><br></div>
+                <div>
+                    <label for="num_palabras"  class="input-label">Número de palabras para resumir:</label>
+                    <input type="text" id="num_palabras" name="num_palabras" class="input-field" placeholder="Ej: 50">
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <label for="modo_resumen"  class="input-label">Modo del resumen:</label>
+                    <!-- <input type="text" id="modo_resumen" name="modo_resumen" class="input-field" placeholder="Ej: alegre, gracioso"> -->
+                    <select id="modo_resumen" name="modo_resumen" class="input-field">
+                        <option value="">Seleccione un modo</option>
+                        <option value="neutro">Neutro</option>
+                        <option value="alegre">Alegre</option>
+                        <option value="gracioso">Gracioso</option>
+                        <option value="triste">Triste</option>
+                        <option value="Autoritario">Autoritario</option>
+                        <option value="original y creativo">Sorpresa</option>
+                        <!-- Puedes agregar más opciones aquí según sea necesario -->
+                    </select>
+                </div>
+                <div><br></div>
+                <button type="submit" class="btn btn-primary btn-block">Resumir</button>
+            </div>
+            <div id="modal" class="modal">
+                <div class="modal-content">
+                    <div class="loader"></div>
+                    <div id="loadingText"></div>
+                </div>
+            </div>
+        </form>
+        <div>
+            {% if 'abstract' in data %}
+            <div class="resumen">
+                <p> {{ data['abstract'] }} </p>
+            </div>
+            {% endif %}
+        </div>
+        <div><br></div>
+        <a href="/mainpage/" class="btn btn-primary btn-block">Limpiar archivos</a>
+        <div><br></div><div><br></div><div><br></div>
+        <a href="/" class="btn btn-primary btn-block" style="position: relative; text-align: left;  background-color: white; color: black;">Sign out</a>
+        <div class="footer" action="/faq/">
+            <a href="/faq/">¿Qué es Appstract?</a>
+        </div>
+        <img class="logo" src="/static/img/logo_principal.png" alt="Logo Principal">
+    </div>
+</body>
+<script>
+    document.querySelector('form').addEventListener('submit', function(e) {
+        document.getElementById('modal').style.display = 'block';
+        // Aquí puedes añadir cualquier lógica adicional que necesites antes de enviar el formulario
+    });
+
+    var text = [
+        "TLDR?",
+        "Procesando tu archivo",
+        "¿Muy largo para escuchar?",
+        "Esto está en un momento...",
+        "Es interesante, eh",
+        "¿Seguro que no quieres analizarlo tu?",
+        "Extrayendo mensajes importantes",
+        "Procesando...",
+        "Un momentito",
+        "se me ha caido el archivo, tengo que volver a empezar :(",
+        "Recogiendo...",
+        "Esto puede tardar un poco",
+        "Hecho :) en seguida estamos",
+        "No te preocupes, estamos trabajando en ello",
+        "Por favor, ten paciencia",
+        "Estamos cerca de terminar",
+        "Uy... lo que esta diciendo este..."
+    ];
+    var counter = 0;
+    var elem = document.getElementById("loadingText");
+    var inst = setInterval(change, 2000);
+
+    function change() {
+        elem.innerHTML = text[counter];
+        counter++;
+        if (counter >= text.length) {
+            counter = 0;
+            // clearInterval(inst); // Detener después de un ciclo completo
+        }
+    }
+
+    // Asegúrate de ocultar el círculo de carga y el texto de carga una vez que la acción de envío se haya completado
+    // Esto puede hacerse en el callback de una llamada AJAX o en el evento 'load' de la página
+    window.addEventListener('load', function() {
+        document.getElementById('modal').style.display = 'none';
+    });
+</script>
+
+<script>
+    function getExtension(filename) {
+        var parts = filename.split('.');
+        return parts[parts.length - 1];
+      }
+
+    document.addEventListener('dragover', (e) => {
+        e.preventDefault()
+    });
+    document.addEventListener('drop', (e) => {
+        drop_audio = document.getElementById("file_audio");
+        drop_video = document.getElementById("file_video");
+        drop_text = document.getElementById("file_text");
+        console.log(e.dataTransfer.files[0]);
+        var ext = getExtension(e.dataTransfer.files[0].name);
+        switch (ext.toLowerCase()) {
+            case 'mp3':
+            drop_audio.files = e.dataTransfer.files;
+            drop_video.value = ""
+            drop_text.value = ""
+            break;
+            case 'mp4':
+            drop_video.files = e.dataTransfer.files;
+            drop_audio.value = ""
+            drop_text.value = ""
+            break;
+            case 'txt':
+            drop_text.files = e.dataTransfer.files;
+            drop_audio.value = ""
+            drop_video.value = ""
+            break;
+        }
+        e.preventDefault()
+        
+    });
+</script>
+
+</html>

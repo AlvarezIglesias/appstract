@@ -14,7 +14,36 @@ La productividad está en auge en estos últimos años, y cada vez se publican m
 
 **HTML, CSS Y JS** para el frontend de la página web.
 
-**Docker** como contenedor para la aplicación, lo que nos permite poder crearla portable entre clouds, lo cual será clave si los créditos de alguna de ellas se nos acaban. 
+**Docker** como contenedor para la aplicación, lo que nos permite poder crearla portable entre clouds, lo cual será clave si los créditos de alguna de ellas se nos acaban.
+
+## Instalacion
+
+La aplicacion viene con un dockerfile para que sea mas sencillo desplegarla, para ponerla en marcha en local hay que seguir estos pasos
+
+ 1- **sudo docker build -t appstract-image .**  # Te crea una imagen (tambien se puede descargar del repositorio de docker)
+ 2- **sudo docker run -p 5000:5000 appstract-image** # despliega la imagen en local
+ 3- **Accede a -> http://localhost:5000/** # Y todo listo!
+
+### Subir contenedor a goolge:
+1. gcloud auth login
+2. gcloud auth configure-docker europe-west1-docker.pkg.dev
+3. gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin https://europe-west1-docker.pkg.dev/
+4. gcloud run deploy  -- (Seguir las instrucciones, region 16, )
+
+### Subir a una VM de goolge:
+1. levantar una maquina virtual y abrirla para conexiones externas
+2. configura las variables project y region
+3. instalar dependencias:
+  -  sudo apt install python3.11-venv
+  -  sudo apt-get install git
+4. lanzar los siguientes comandos para que la aplicacion se lance actualizada (se puede poner como script de lanzamiento):
+  - rm -rf appstract/
+  - git clone https://github.com/AlvarezIglesias/appstract.git
+  - cd appstract/
+  - python3 -m venv appstract-env
+  - source appstract-env/bin/activate
+  - pip install -r requirements.txt
+  - python3 main.py
 
 ## Utilizaremos control de versiones con la siguiente estructura:
 - **Rama main:** para los cambios finales antes de un hito.
@@ -24,7 +53,7 @@ La productividad está en auge en estos últimos años, y cada vez se publican m
   - **hotfix:** corrección de errores urgentes por haberse detectado un defecto crítico (generalmente en producción) que deba resolverse.
   - **Release:** Rama lista para subir a main donde poder depurar el código.
 Algunos ejemplos de ramas serian: *Feature/AlvarezIglesias/diseño_web* , *Feature/Corrochano/conexion_BBDD* o *Hotfix/cmolina/google_api_fix*
- 
+
 ## Changelog
 Cada commit llevara asociado un changelog acumulativo de los cambios realizados (los mas nuevos siempre encima) en el siguiente formato:
 
@@ -34,10 +63,11 @@ Cada commit llevara asociado un changelog acumulativo de los cambios realizados 
 - to
 - update
 
-## Miembros 
+## Miembros
 Álvaro Corrochano López, 10/10 de implicación. -> Corrochano
 
 Álvaro Álvarez Iglesias, 10/10 de implicación. -> AlvarezIglesias
 
 Cristian Molina Muñoz, 10/10 de implicación. -> crismom / crismo04
 
+![Logo](https://github.com/AlvarezIglesias/appstract/blob/develop/static/img/logo_principal.png)

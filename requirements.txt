@@ -1,1 +1,13 @@
 Flask==3.0.2
+gunicorn==21.2.0
+watchdog==4.0.0
+gcloud==0.18.3
+google-cloud-speech==2.25.1
+google-cloud-logging==3.10.0
+google-cloud-bigquery==3.21.0
+moviepy==1.0.3
+vertexai==1.46.0
+Werkzeug==3.0.1
+flask_login==0.6.3
+# waitress==3.0.0
+# pydub==0.25.1

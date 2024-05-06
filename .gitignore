@@ -1,0 +1,5 @@
+/credentials
+/tmp
+/__pycache__
+*.pyc
+**/__pycache__/
