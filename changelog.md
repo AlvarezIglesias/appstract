@@ -1,8 +1,9 @@
-## 2024-05-03 - feature/cmolina/updateVM2
+## 2024-05-03 - feature/cmolina/configure_fields
 
-- Changed the login to no acept duplicate IDs
-- add timestamp field to know the register date
-- add fields to configure the sumary (num_words & style)
+- Changed the login to no accept duplicate IDs
+- Add timestamp field to know the register date
+- Add fields to configure the summary (num_words & style)
+- New prompt query for summarize text
 
 ## 2024-05-03 - feature/cmolina/updateVM2
 
