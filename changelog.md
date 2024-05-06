@@ -19,11 +19,21 @@
 - Add fields to configure the summary (num_words & style)
 - New prompt query for summarize text
 
+## 2024-05-06 - feature/AlvarezIglesias/dragAndDrop
+
+- Now fields are cleaned when draging a new file
+
+
 ## 2024-05-05 - feature/cmolina/updateVM2
 
 - Changed the main to fix it so that it can be uploaded to a GCP VM, thats includes:
     - Changes in html to manage better problems whit login
     - Changes in login to include bigquery and users in that mode
+
+
+## 2024-05-05 - feature/AlvarezIglesias/dragAndDrop
+
+- Now files can be drag and dropped to the app instead of manually selecting the files
 
 
 ## 2024-05-05 - feature/Corrochano/TextToTextUnification
@@ -34,6 +44,11 @@
 ## 2024-05-03 - feature/cmolina/updateVM
 
 - Changed the main to fix it so that it can be uploaded to a GCP VM
+
+## 2024-04-12 - feature/AlvarezIglesias/Register
+
+- New functional register view
+
 
 ## 2024-04-10 - feature/Corrochano/faq
 
