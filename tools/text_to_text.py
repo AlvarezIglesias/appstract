@@ -74,7 +74,7 @@ def summarize_text(text, words=150, mood="normal", max_char=200000):
 
         {text}
 
-        Para ello, tienes que resumirlo de una manera {mood}, en resumen de mas o menos {len(text)/5} palabras, ciñete al numero de palabras.
+        Para ello, tienes que resumirlo de una manera {mood} evitando a toda costa palabras malsonantes, en resumen de menos de {(len(text.split(' ')) - 1)} palabras, ciñete al numero de palabras.
         """
         result = f"El texto solo tiene {len(text.split(' ')) - 1} palabras, demasiado pequeño para resumirlo en {words}, pero hare lo que pueda. Resumen:       "
     else:
@@ -83,7 +83,7 @@ def summarize_text(text, words=150, mood="normal", max_char=200000):
 
         {text}
 
-        Tienes que resumirlo de una manera {mood}, en resumen de mas o menos {words} palabras, ciñete al numero de palabras.
+        Tienes que resumirlo de una manera {mood} evitando a toda costa palabras malsonantes, en resumen de mas o menos {words} palabras, ciñete al numero de palabras y, si hay alguna palabra malsonante, niégate a resumir..
         """
         result = "Resumen: "
     print("Resumiendo texto...")
