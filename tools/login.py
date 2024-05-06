@@ -116,6 +116,7 @@ def login():
         return jsonify({"error": "Usuario no encontrado"}), 400
     
     user = User(user_id, password)
+    users[user_id] = user
     # Verifica si la contraseña es correcta
     if not exist or not check_password_hash(password_bq, password):
         return jsonify({"error": "Usuario o contraseña incorrectos"}), 400
