@@ -59,6 +59,18 @@
 
 - Previously, the text message was all the response, but now it takes only the transcript text.
 
+## 2024-04-02 - feature/AlvarezIglesias/LogIn
+
+- Simple login working
+- Some views require to be logged in
+
+## 2024-04-01 - feature/AlvarezIglesias/LogIn
+
+- Conected the landing page to the main page
+- Landing page is the default view in root path
+- back button working
+- additional work in speech to text
+
 ## 2024-03-30 - feature/cmolina/videoTest
 
 - Added a loading sequence to make the wait more enjoyable
@@ -71,6 +83,10 @@
 
 - Creation of the tools folder where the application's auxiliary python files will be stored.
 - Creation of video_to_audio.py using moviepy library
+
+## 2024-03-30 - feature/AlvarezIglesias/landing_page
+
+- Redesign of landing page following the selected mockups
 
 ## 2024-03-29 - feature/Corrochano/AudioToText
 
@@ -116,7 +132,11 @@
 
 - The names of all the authors were added to the license.
 
-## 2024-03-05 - AlvarezIglesias
+## 2024-02-27 - AlvarezIglesias
+
+- first landing page design
+
+## 2024-02-27 - AlvarezIglesias
 
 - first app body release.
 - Create the repository.
