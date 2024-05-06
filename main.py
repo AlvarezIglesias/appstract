@@ -7,8 +7,9 @@ from tools.text_to_text import summarize_text
 from tools.login import app_file_login, init_login
 from flask_login import login_required
 
-#from tools.read_audio import transcribe_file
-#from tools.text_to_text import summarize_text
+from tools.read_audio import transcribe_file
+from tools.text_to_text import summarize_text
+from tools.video_to_audio import video_to_audio
 
 ALLOWED_EXTENSIONS = {'mp3'}
 UPLOAD_FOLDER = './tmp'
@@ -95,7 +96,33 @@ def upload_file():
 
                 print(data)
                 return render_template("/main_page.html", data={"abstract" : data})
-                
+            
+            elif request.files['file_video'].filename != '':
+                print("mp4")
+                file = request.files['file_video']
+
+                if file.filename == '':
+                    flash('No selected file')
+                    return redirect(request.url)
+
+                if file and allowed_file(file.filename):
+                        filename = secure_filename(file.filename)
+                        filepath = os.path.join(UPLOAD_FOLDER, filename)
+                        file.save(filepath)
+
+                res = transcribe_file(video_to_audio(filepath))
+                print(f"respuesta: {res}")
+                data = ''
+                if res.results:
+                    for result in res.results:
+                        data += result.alternatives[0].transcript + ' '
+                    data = str(summarize_text(data))
+                else:
+                    print(f"Ha habido un problema con el audio: {res}")
+
+                print(data)
+                return render_template("/main_page.html", data={"abstract" : data})
+            
             else:
                 flash('No file part')
                 return redirect(request.url)
